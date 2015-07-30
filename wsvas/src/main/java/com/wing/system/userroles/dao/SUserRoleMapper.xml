@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wing.system.userroles.dao.SUserRoleDao">
+
+    <!-- 结果映射集 -->
+    <resultMap id="SUserRoleMap" type="com.wing.system.userroles.model.SUserRole">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+    </resultMap>
+
+    <!-- 结果映射集 -->
+    <resultMap id="SRoleMap" type="com.wing.system.roles.model.SRole">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="enabled" jdbcType="CHAR" property="enabled"/>
+        <result column="is_sys" jdbcType="CHAR" property="isSys"/>
+    </resultMap>
+
+    <!-- 查询数据 -->
+    <select id="querySUserRole" resultMap="SUserRoleMap">
+    <![CDATA[
+        select
+            id,
+            user_id,
+            role_id
+        from
+            s_user_roles
+        where
+            1 = 1
+    ]]>
+    <if test="params.id != null">
+    <![CDATA[
+        and id = #{params.id}
+    ]]>
+    </if>
+    <if test="params.userId != null and params.userId neq ''">
+    <![CDATA[
+        and user_id like concat('%', #{params.userId}, '%')
+    ]]>
+    </if>
+    <if test="params.roleId != null and params.roleId neq ''">
+    <![CDATA[
+        and role_id like concat('%', #{params.roleId}, '%')
+    ]]>
+    </if>
+    <if test="sortname != null and sortorder != null">
+        order by ${sortname} ${sortorder}
+    </if>
+    <if test="sortname != null and sortorder == null">
+        order by ${sortname} asc
+    </if>
+    </select>
+
+    <!-- 选择性插入数据 -->
+    <insert id="insert" parameterType="com.wing.system.userroles.model.SUserRole">
+    <![CDATA[
+        insert into s_user_roles
+    ]]>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            id,
+        ]]>
+        </if>
+        <if test="userId != null">
+        <![CDATA[
+            user_id,
+        ]]>
+        </if>
+        <if test="roleId != null">
+        <![CDATA[
+            role_id,
+        ]]>
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="userId != null">
+        <![CDATA[
+            #{userId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="roleId != null">
+        <![CDATA[
+            #{roleId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </trim>
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+    <![CDATA[
+        delete from s_user_roles where id = #{id}
+    ]]>
+    </delete>
+
+    <!-- 更新数据 -->
+    <update id="update" parameterType="com.wing.system.userroles.model.SUserRole">
+    <![CDATA[
+        update s_user_roles
+    ]]>
+    <set>
+        <if test="id != null">
+            <![CDATA[
+            id = #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="userId != null">
+            <![CDATA[
+            user_id = #{userId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="roleId != null">
+            <![CDATA[
+            role_id = #{roleId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </set>
+    where id = #{id}
+    </update>
+
+    <!-- 根据ID获取数据 -->
+    <select id="getSUserRoleById" resultMap="SUserRoleMap">
+    <![CDATA[
+        select
+            id,
+            user_id,
+            role_id
+        from
+            s_user_roles
+        where
+            id = #{id}
+    ]]>
+    </select>
+
+    <!-- 根据登录用户查询权限 -->
+    <select id="queryAuthByLoginName" resultType="java.lang.String">
+    <![CDATA[
+        select
+            b.auth_id
+        from
+            s_user_roles a
+        inner join
+            s_role_auths b
+        on
+            a.role_id = b.role_id
+        where
+            a.user_id = #{loginName}
+        union
+            select
+                auth_id
+            from
+                s_auth_data
+            where
+                is_sys = '1'
+            and is_sys in (
+                  select
+                      is_sys
+                  from
+                      s_users
+                  where
+                  login_name = #{loginName}
+             )
+    ]]>
+    </select>
+
+    <!-- 根据用户的ID获取已分配的角色信息 -->
+    <select id="queryRolesByUser" resultMap="SRoleMap">
+    <![CDATA[
+      select
+          b.*
+      from
+          s_user_roles a
+      inner join
+          s_roles b
+      on
+          a.role_id = b.role_id
+      inner join
+          s_users c
+      on
+          a.user_id = c.login_name
+      where
+          c.id = #{id}
+          and b.enabled = 1
+          and c.enabled = 1
+      order by b.id
+    ]]>
+    </select>
+
+    <!-- 根据用户的ID获取未分配的角色信息 -->
+    <select id="queryNotRolesByUser" resultMap="SRoleMap">
+    <![CDATA[
+        select
+            *
+        from
+            s_roles
+        where role_id not in (
+            select role_id from s_user_roles where user_id in (
+                select login_name from s_users where id = #{id}
+            )
+        )
+    ]]>
+    </select>
+
+    <!-- 根据用户ID，角色ID删除用户角色关系信息 -->
+    <delete id="deleteByUserRole">
+    <![CDATA[
+        delete from s_user_roles where user_id = #{userId} and role_id = #{roleId}
+    ]]>
+    </delete>
+
+</mapper>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wing.system.keygenerator.dao.SKeyGeneratorDao">
+
+    <!-- 结果映射集 -->
+    <resultMap id="SKeyGeneratorMap" type="com.wing.system.keygenerator.model.SKeyGenerator">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="prefix" jdbcType="VARCHAR" property="prefix"/>
+        <result column="num" jdbcType="INTEGER" property="num"/>
+        <result column="suffix" jdbcType="VARCHAR" property="suffix"/>
+        <result column="length" jdbcType="INTEGER" property="length"/>
+        <result column="key_date" jdbcType="TIMESTAMP" property="keyDate"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+    </resultMap>
+
+    <!-- 查询数据 -->
+    <select id="querySKeyGenerator" resultMap="SKeyGeneratorMap">
+    <![CDATA[
+        select
+            id,
+            prefix,
+            num,
+            suffix,
+            length,
+            key_date,
+            type
+        from
+            s_key_generator
+        where
+            1 = 1
+    ]]>
+    <if test="params.id != null">
+    <![CDATA[
+        and id = #{params.id}
+    ]]>
+    </if>
+    <if test="params.prefix != null and params.prefix neq ''">
+    <![CDATA[
+        and prefix like concat('%', #{params.prefix}, '%')
+    ]]>
+    </if>
+    <if test="params.num != null">
+    <![CDATA[
+        and num = #{params.num}
+    ]]>
+    </if>
+    <if test="params.suffix != null and params.suffix neq ''">
+    <![CDATA[
+        and suffix like concat('%', #{params.suffix}, '%')
+    ]]>
+    </if>
+    <if test="params.length != null">
+    <![CDATA[
+        and length = #{params.length}
+    ]]>
+    </if>
+    <if test="params.keyDate != null">
+    <![CDATA[
+        and key_date = #{params.keyDate}
+    ]]>
+    </if>
+    <if test="params.type != null and params.type neq ''">
+    <![CDATA[
+        and type like concat('%', #{params.type}, '%')
+    ]]>
+    </if>
+    <if test="sortname != null and sortorder != null">
+        order by ${sortname} ${sortorder}
+    </if>
+    <if test="sortname != null and sortorder == null">
+        order by ${sortname} asc
+    </if>
+    </select>
+
+    <!-- 选择性插入数据 -->
+    <insert id="insert" parameterType="com.wing.system.keygenerator.model.SKeyGenerator">
+    <![CDATA[
+        insert into s_key_generator
+    ]]>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            id,
+        ]]>
+        </if>
+        <if test="prefix != null">
+        <![CDATA[
+            prefix,
+        ]]>
+        </if>
+        <if test="num != null">
+        <![CDATA[
+            num,
+        ]]>
+        </if>
+        <if test="suffix != null">
+        <![CDATA[
+            suffix,
+        ]]>
+        </if>
+        <if test="length != null">
+        <![CDATA[
+            length,
+        ]]>
+        </if>
+        <if test="keyDate != null">
+        <![CDATA[
+            key_date,
+        ]]>
+        </if>
+        <if test="type != null">
+        <![CDATA[
+            type,
+        ]]>
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+          #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="prefix != null">
+        <![CDATA[
+          #{prefix, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="num != null">
+        <![CDATA[
+          #{num, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="suffix != null">
+        <![CDATA[
+          #{suffix, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="length != null">
+        <![CDATA[
+          #{length, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="keyDate != null">
+        <![CDATA[
+          #{keyDate, jdbcType=DATE},
+        ]]>
+        </if>
+        <if test="type != null">
+        <![CDATA[
+          #{type, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </trim>
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+    <![CDATA[
+        delete from s_key_generator where id = #{id}
+    ]]>
+    </delete>
+
+    <!-- 更新数据 -->
+    <update id="update" parameterType="com.wing.system.keygenerator.model.SKeyGenerator">
+    <![CDATA[
+        update s_key_generator
+    ]]>
+    <set>
+        <if test="id != null">
+        <![CDATA[
+            id = #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="prefix != null">
+        <![CDATA[
+            prefix = #{prefix, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="num != null">
+        <![CDATA[
+            num = #{num, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="suffix != null">
+        <![CDATA[
+            suffix = #{suffix, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="length != null">
+        <![CDATA[
+            length = #{length, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="keyDate != null">
+        <![CDATA[
+            key_date = #{keyDate, jdbcType=DATE},
+        ]]>
+        </if>
+        <if test="type != null">
+        <![CDATA[
+            type = #{type, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </set>
+    where id = #{id}
+    </update>
+
+    <!-- 根据ID获取数据 -->
+    <select id="getSKeyGeneratorById" resultMap="SKeyGeneratorMap">
+    <![CDATA[
+        select
+            id,
+            prefix,
+            num,
+            suffix,
+            length,
+            key_date,
+            type
+        from
+            s_key_generator
+        where
+            id = #{id}
+    ]]>
+    </select>
+
+    <!-- 根据类型获取不同的生成策略 -->
+    <select id="getSKeyGeneratorByType" resultMap="SKeyGeneratorMap">
+    <![CDATA[
+        select
+            id,
+            prefix,
+            num,
+            suffix,
+            length,
+            key_date,
+            type
+        from
+            s_key_generator
+        where
+            type = #{type}
+    ]]>
+    </select>
+</mapper>

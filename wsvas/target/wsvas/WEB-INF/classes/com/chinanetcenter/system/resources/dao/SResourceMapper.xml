@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinanetcenter.system.resources.dao.SResourceDao">
+
+    <!-- 结果映射集 -->
+    <resultMap id="SResourceMap" type="com.chinanetcenter.system.resources.model.SResource">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="resource_id" jdbcType="VARCHAR" property="resourceId"/>
+        <result column="resource_name" jdbcType="VARCHAR" property="resourceName"/>
+        <result column="resource_type" jdbcType="CHAR" property="resourceType"/>
+        <result column="resource_priority" jdbcType="INTEGER" property="resourcePriority"/>
+        <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl"/>
+        <result column="enabled" jdbcType="CHAR" property="enabled"/>
+        <result column="is_sys" jdbcType="CHAR" property="isSys"/>
+    </resultMap>
+
+    <!-- 查询数据 -->
+    <select id="querySResource" resultMap="SResourceMap">
+    <![CDATA[
+        select
+            id,
+            resource_id,
+            resource_name,
+            resource_type,
+            resource_priority,
+            resource_url,
+            enabled,
+            is_sys
+        from
+            s_resources
+        where
+            1 = 1
+    ]]>
+    <if test="params.id != null">
+    <![CDATA[
+        and id = #{params.id}
+    ]]>
+    </if>
+    <if test="params.resourceId != null and params.resourceId neq ''">
+    <![CDATA[
+        and resource_id like concat('%', #{params.resourceId}, '%')
+    ]]>
+    </if>
+    <if test="params.resourceName != null and params.resourceName neq ''">
+    <![CDATA[
+        and resource_name like concat('%', #{params.resourceName}, '%')
+    ]]>
+    </if>
+    <if test="params.resourceType != null and params.resourceType neq ''">
+    <![CDATA[
+        and resource_type like concat('%', #{params.resourceType}, '%')
+    ]]>
+    </if>
+    <if test="params.resourcePriority != null">
+    <![CDATA[
+        and resource_priority = #{params.resourcePriority}
+    ]]>
+    </if>
+    <if test="params.resourceUrl != null and params.resourceUrl neq ''">
+    <![CDATA[
+        and resource_url like concat('%', #{params.resourceUrl}, '%')
+    ]]>
+    </if>
+    <if test="params.enabled != null and params.enabled neq ''">
+    <![CDATA[
+        and enabled like concat('%', #{params.enabled}, '%')
+    ]]>
+    </if>
+    <if test="params.isSys != null and params.isSys neq ''">
+    <![CDATA[
+        and is_sys like concat('%', #{params.isSys}, '%')
+    ]]>
+    </if>
+    <if test="sortname != null and sortorder != null">
+        order by ${sortname} ${sortorder}
+    </if>
+    <if test="sortname != null and sortorder == null">
+        order by ${sortname} asc
+    </if>
+    </select>
+
+    <!-- 选择性插入数据 -->
+    <insert id="insert" parameterType="com.chinanetcenter.system.resources.model.SResource">
+    <![CDATA[
+        insert into s_resources
+    ]]>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            id,
+        ]]>
+        </if>
+        <if test="resourceId != null">
+        <![CDATA[
+            resource_id,
+        ]]>
+        </if>
+        <if test="resourceName != null">
+        <![CDATA[
+            resource_name,
+        ]]>
+        </if>
+        <if test="resourceType != null">
+        <![CDATA[
+            resource_type,
+        ]]>
+        </if>
+        <if test="resourcePriority != null">
+        <![CDATA[
+            resource_priority,
+        ]]>
+        </if>
+        <if test="resourceUrl != null">
+        <![CDATA[
+            resource_url,
+        ]]>
+        </if>
+        <if test="enabled != null">
+        <![CDATA[
+            enabled,
+        ]]>
+        </if>
+        <if test="isSys != null">
+        <![CDATA[
+            is_sys,
+        ]]>
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="resourceId != null">
+        <![CDATA[
+            #{resourceId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="resourceName != null">
+        <![CDATA[
+            #{resourceName, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="resourceType != null">
+        <![CDATA[
+            #{resourceType, jdbcType=CHAR},
+        ]]>
+        </if>
+        <if test="resourcePriority != null">
+        <![CDATA[
+            #{resourcePriority, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="resourceUrl != null">
+        <![CDATA[
+            #{resourceUrl, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="enabled != null">
+        <![CDATA[
+            #{enabled, jdbcType=CHAR},
+        ]]>
+        </if>
+        <if test="isSys != null">
+        <![CDATA[
+            #{isSys, jdbcType=CHAR},
+        ]]>
+        </if>
+    </trim>
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+    <![CDATA[
+        delete from s_resources where id = #{id}
+    ]]>
+    </delete>
+
+    <!-- 更新数据 -->
+    <update id="update" parameterType="com.chinanetcenter.system.resources.model.SResource">
+    <![CDATA[
+        update s_resources
+    ]]>
+    <set>
+        <if test="id != null">
+            <![CDATA[
+            id = #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="resourceId != null">
+            <![CDATA[
+            resource_id = #{resourceId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="resourceName != null">
+            <![CDATA[
+            resource_name = #{resourceName, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="resourceType != null">
+            <![CDATA[
+            resource_type = #{resourceType, jdbcType=CHAR},
+        ]]>
+        </if>
+        <if test="resourcePriority != null">
+            <![CDATA[
+            resource_priority = #{resourcePriority, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="resourceUrl != null">
+            <![CDATA[
+            resource_url = #{resourceUrl, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="enabled != null">
+            <![CDATA[
+            enabled = #{enabled, jdbcType=CHAR},
+        ]]>
+        </if>
+        <if test="isSys != null">
+            <![CDATA[
+            is_sys = #{isSys, jdbcType=CHAR},
+        ]]>
+        </if>
+    </set>
+    where id = #{id}
+    </update>
+
+    <!-- 根据ID获取数据 -->
+    <select id="getSResourceById" resultMap="SResourceMap">
+    <![CDATA[
+        select
+            id,
+            resource_id,
+            resource_name,
+            resource_type,
+            resource_priority,
+            resource_url,
+            enabled,
+            is_sys
+        from
+            s_resources
+        where
+            id = #{id}
+    ]]>
+    </select>
+</mapper>

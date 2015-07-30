@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <preConditions>
+        <dbms type="mysql" />
+    </preConditions>
+    <changeSet id="create.table" author="panwb">
+        <createTable tableName="menu">
+            <column autoIncrement="true" name="id" type="int" valueNumeric="1">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="menu_id" type="varchar(12)">
+                <constraints  nullable="false" />
+            </column>
+            <column name="menu_name" type="varchar(50)" >
+                <constraints  nullable="false" />
+            </column>
+            <column name="sort_no" type="int"/>
+            <column name="level" type="int">
+                <constraints  nullable="false" />
+            </column>
+            <column name="parent_id" type="varchar(12)"/>
+            <column name="url" type="varchar(255)"/>
+            <column name="remark" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

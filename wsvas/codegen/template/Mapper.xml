@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${table.package}.${table.destinationClassName}Dao">
+
+#set($endIndex = $table.package.lastIndexOf("."))
+#set($columnStr = "")
+#foreach($column in $table.columns)
+    #set($columnStr = $columnStr.concat($column.SqlName).concat(", "))
+#end
+#set($strLength = $columnStr.lastIndexOf(","))
+#set($columnStr = $columnStr.substring(0, $strLength))
+    <!-- 结果映射集 -->
+    <resultMap id="${table.destinationClassName}Map" type="${table.package.substring(0, $endIndex)}.model.${table.destinationClassName}">
+#foreach($column in $table.columns)
+#if($column.pk)
+#if($column.SqlTypeName == 'INT')
+        <id column="${column.SqlName.toLowerCase()}" jdbcType="INTEGER" property="${column.variableName}"/>
+#end
+#if($column.SqlTypeName == 'DATETIME')
+        <id column="${column.SqlName.toLowerCase()}" jdbcType="TIMESTAMP" property="${column.variableName}"/>
+#end
+#if($column.SqlTypeName != 'INT' && $column.SqlTypeName != 'DATETIME')
+        <id column="${column.SqlName.toLowerCase()}" jdbcType="${column.SqlTypeName}" property="${column.variableName}"/>
+#end
+#end
+#if(!$column.pk)
+#if($column.SqlTypeName == 'INT')
+        <result column="${column.SqlName.toLowerCase()}" jdbcType="INTEGER" property="${column.variableName}"/>
+#end
+#if($column.SqlTypeName == 'DATETIME')
+        <result column="${column.SqlName.toLowerCase()}" jdbcType="TIMESTAMP" property="${column.variableName}"/>
+#end
+#if($column.SqlTypeName != 'INT' && $column.SqlTypeName != 'DATETIME')
+        <result column="${column.SqlName.toLowerCase()}" jdbcType="${column.SqlTypeName}" property="${column.variableName}"/>
+#end
+#end
+#end
+    </resultMap>
+
+#set($i = 0)
+    <!-- 查询数据 -->
+    <select id="query${table.destinationClassName}" resultMap="${table.destinationClassName}Map">
+    <![CDATA[
+        select
+#foreach($column in $table.columns)
+#set($i = $i + 1)
+#if($i == $table.columns.size())
+            $column.SqlName.toLowerCase()
+#end
+#if($i != $table.columns.size())
+            $column.SqlName.toLowerCase(),
+#end
+#end
+        from
+            $table.name
+        where
+            1 = 1
+    ]]>
+#foreach($column in $table.columns)
+#if($column.SqlTypeName == 'VARCHAR' || $column.SqlTypeName == 'CHAR' || $column.SqlTypeName == 'LONGVARCHAR')
+    <if test="params.${column.variableName} != null and params.${column.variableName} neq ''">
+    <![CDATA[
+        and $column.SqlName.toLowerCase() like concat('%', #{params.$column.variableName}, '%')
+    ]]>
+    </if>
+#end
+#if($column.SqlTypeName != 'VARCHAR' && $column.SqlTypeName != 'CHAR' && $column.SqlTypeName != 'LONGVARCHAR')
+    <if test="params.${column.variableName} != null">
+    <![CDATA[
+        and $column.SqlName.toLowerCase() = #{params.$column.variableName}
+    ]]>
+    </if>
+#end
+#end
+    <if test="sortname != null and sortorder != null">
+        order by ${sortname} ${sortorder}
+    </if>
+    <if test="sortname != null and sortorder == null">
+        order by ${sortname} asc
+    </if>
+    </select>
+
+    <!-- 选择性插入数据 -->
+    <insert id="insert" parameterType="${table.package.substring(0, $endIndex)}.model.${table.destinationClassName}">
+    <![CDATA[
+        insert into $table.name
+    ]]>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+#foreach($column in $table.columns)
+        <if test="$column.variableName != null">
+        <![CDATA[
+            $column.SqlName.toLowerCase(),
+        ]]>
+        </if>
+#end
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+#foreach($column in $table.columns)
+        <if test="$column.variableName != null">
+        <![CDATA[
+#if($column.SqlTypeName == 'INT')
+          #{$column.variableName, jdbcType=INTEGER},
+#end
+#if($column.SqlTypeName == 'DATETIME')
+          #{$column.variableName, jdbcType=DATE},
+#end
+#if($column.SqlTypeName != 'INT' && $column.SqlTypeName != 'DATETIME')
+          #{$column.variableName, jdbcType=$column.SqlTypeName},
+#end
+        ]]>
+        </if>
+#end
+    </trim>
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+    <![CDATA[
+        delete from $table.name where $table.PkColumn.SqlName.toLowerCase() = #{$table.PkColumn.variableName}
+    ]]>
+    </delete>
+
+    <!-- 更新数据 -->
+    <update id="update" parameterType="${table.package.substring(0, $endIndex)}.model.${table.destinationClassName}">
+    <![CDATA[
+        update $table.name
+    ]]>
+    <set>
+#foreach($column in $table.columns)
+        <if test="$column.variableName != null">
+        <![CDATA[
+#if($column.SqlTypeName == 'INT')
+            $column.SqlName.toLowerCase() = #{$column.variableName, jdbcType=INTEGER},
+#end
+#if($column.SqlTypeName == 'DATETIME')
+            $column.SqlName.toLowerCase() = #{$column.variableName, jdbcType=DATE},
+#end
+#if($column.SqlTypeName != 'INT' && $column.SqlTypeName != 'DATETIME')
+            $column.SqlName.toLowerCase() = #{$column.variableName, jdbcType=$column.SqlTypeName},
+#end
+        ]]>
+        </if>
+#end
+    </set>
+    where $table.PkColumn.SqlName.toLowerCase() = #{$table.PkColumn.variableName}
+    </update>
+
+#set($i = 0)
+    <!-- 根据ID获取数据 -->
+    <select id="get${table.destinationClassName}By${table.PkColumn.variableName.substring(0,1).toUpperCase()}${table.PkColumn.variableName.substring(1)}" resultMap="${table.destinationClassName}Map">
+    <![CDATA[
+        select
+#foreach($column in $table.columns)
+#set($i = $i + 1)
+#if($i == $table.columns.size())
+            $column.SqlName.toLowerCase()
+#end
+#if($i != $table.columns.size())
+            $column.SqlName.toLowerCase(),
+#end
+#end
+        from
+            $table.name
+        where
+            $table.PkColumn.SqlName.toLowerCase() = #{$table.PkColumn.variableName}
+    ]]>
+    </select>
+</mapper>

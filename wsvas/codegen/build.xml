@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE target [
+    <!ENTITY table SYSTEM "file:./table.xml">
+]>
+
+<project name="Middlegen Code Generator" default="generate" basedir=".">
+
+    <!-- 配置参数文件 -->
+    <property file="build.properties" />
+	<!-- 是否使用xdoclet？ -->
+    <property name="gen.xdoclet-tag" value="false" />
+    <!-- lib包目录 -->
+	<property name="lib.dir" value="${basedir}/lib" />
+	<!-- 生成的目标目录 -->
+    <property name="src.dir" value="../src/main/java" />
+	<!-- JSP目录 -->
+    <property name="jsp.dir" value="../src/main/webapp/web-inf/views/${module}" />
+
+    <!-- 初始化 -->
+	<target name="init" depends="prepare">
+
+        <!-- 自定义代码生成任务 -->
+		<taskdef name="middlegen" classname="middlegen.MiddlegenTask" classpathref="middlegen.classpath" />
+	</target>
+
+    <!-- 准备阶段，定义一些属性信息 -->
+    <target name="prepare">
+		<path id="middlegen.classpath">
+			<fileset dir="${lib.dir}" includes="*.jar" />
+		</path>
+        <available property="middlegen" classname="middlegen.MiddlegenTask" classpathref="middlegen.classpath" />
+    </target>
+	<target name="gen-code">
+
+		<middlegen appname="${package}" prefsdir="."
+			gui="${gui}" databaseurl="${database.url}"
+			driver="${database.driver}"
+			username="${database.userid}"
+			password="${database.password}"
+			schema="${database.schema}">
+
+            <java name="jsp" destination="${basedir}" package="${jsp}">
+                <fileproducer template="${basedir}/template/List.jsp" destination="${jsp.dir}" filename="{0}List.jsp" />
+            </java>
+            <java name="editJsp" destination="${basedir}" package="${jsp}">
+                <fileproducer template="${basedir}/template/edit.jsp" destination="${jsp.dir}" filename="Edit{0}.jsp" />
+            </java>
+			<java name="service" destination="${basedir}" package="${package}.service">
+				<fileproducer template="${basedir}/template/Service.java" destination="${src.dir}" filename="{0}Service.java" />
+			</java>
+            <java name="Controller" destination="${basedir}" package="${package}.action">
+                <fileproducer template="${basedir}/template/Action.java" destination="${src.dir}" filename="{0}Action.java" />
+            </java>
+            <java name="Bean" destination="${basedir}" package="${package}.model">
+                <fileproducer template="${basedir}/template/Bean.java" destination="${src.dir}" filename="{0}.java" />
+            </java>
+            <java name="ParamsBean" destination="${basedir}" package="${package}.model">
+                <fileproducer template="${basedir}/template/ParamsBean.java" destination="${src.dir}" filename="{0}Params.java" />
+            </java>
+            <java name="Dao" destination="${basedir}" package="${package}.dao">
+                <fileproducer template="${basedir}/template/Dao.java" destination="${src.dir}" filename="{0}Dao.java" />
+            </java>
+            <java name="Mapper" destination="${basedir}" package="${package}.dao">
+                <fileproducer template="${basedir}/template/Mapper.xml" destination="${src.dir}" filename="{0}Mapper.xml" />
+            </java>
+            <table name="${database.table}" />
+        </middlegen>
+	</target>
+
+    <target name="clean">
+        <delete>
+            <fileset dir="${basedir}">
+                <include name="*-prefs.properties" />
+            </fileset>
+        </delete>
+    </target>
+
+	<target name="generate" depends="init,gen-code,clean" />
+</project>

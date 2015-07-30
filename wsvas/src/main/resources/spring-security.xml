@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+    					http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+                        http://www.springframework.org/schema/security 
+                        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <!-- 无需控制权限的URL -->
+    <http pattern="/js/**" security="none"/>
+    <http pattern="/images/**" security="none"/>
+    <http pattern="/css/*" security="none"/>
+    <http pattern="/login.jsp" security="none" />
+
+    <!-- 权限控制 -->
+    <http entry-point-ref="authenticationProcessingFilterEntryPoint">
+
+        <access-denied-handler ref="accessDeniedHandler" />
+        <!-- 增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前，
+                    实现用户、角色、权限、资源的数据库管理。  -->
+
+        <custom-filter ref="vasFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
+        <custom-filter ref="loginFilter" position="FORM_LOGIN_FILTER"/>
+        <custom-filter ref="exceptionTranslationFilter" after="EXCEPTION_TRANSLATION_FILTER"></custom-filter>
+        <custom-filter ref="rememberMeProcessingFilter" position="REMEMBER_ME_FILTER"></custom-filter>
+        <custom-filter ref="logoutFilter" position="LOGOUT_FILTER"></custom-filter>
+    </http>
+
+    <!-- 一个自定义的filter，必须包含authenticationManager,
+    accessDecisionManager,securityMetadataSource三个属性。  -->
+    <beans:bean id="vasFilter"
+                class="com.wing.framework.security.VasFilterSecurityInterceptor">
+        <beans:property name="authenticationManager"
+                        ref="authenticationManager"/>
+        <beans:property name="accessDecisionManager"
+                        ref="vasAccessDecisionManager"/>
+        <beans:property name="securityMetadataSource"
+                        ref="vasSecurityMetadataSource"/>
+    </beans:bean>
+
+    <!-- 注意能够为authentication-manager 设置alias别名  -->
+    <authentication-manager alias="authenticationManager" erase-credentials="false">
+        <authentication-provider user-service-ref="vasUserDetailsManager">
+            <password-encoder hash="md5" />
+        </authentication-provider>
+        <authentication-provider ref="rememberMeAuthenticationProvider">
+        </authentication-provider>
+    </authentication-manager>
+
+    <!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源。 -->
+    <beans:bean id="vasAccessDecisionManager"
+                class="com.wing.framework.security.VasAccessDecisionManager">
+    </beans:bean>
+
+    <!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色去访问。 -->
+    <beans:bean id="vasSecurityMetadataSource"
+                class="com.wing.framework.security.VasInvocationSecurityMetadataSourceService">
+        <beans:constructor-arg ref="SAuthDataDao" />
+        <beans:constructor-arg ref="SAuthResourceDao" />
+    </beans:bean>
+
+    <!-- 用户权限管理 -->
+    <beans:bean id="vasUserDetailsManager"
+                class="com.wing.framework.security.VasUserDetailsService">
+    </beans:bean>
+
+    <!-- 记住密码过滤器 -->
+    <beans:bean id="rememberMeProcessingFilter"
+          class="com.wing.framework.security.VasRememberMeAuthenticationFilter">
+        <beans:property name="authenticationManager" ref="authenticationManager" />
+        <beans:property name="rememberMeServices" ref="rememberMeServices" />
+        <beans:property name="userDao" ref="SUserDao"></beans:property>
+    </beans:bean>
+
+    <!-- 记住密码Service -->
+    <beans:bean id="rememberMeServices"
+                class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+        <beans:property name="userDetailsService" ref="vasUserDetailsManager" />
+        <beans:property name="key" value="Q1F1A1O1D1N2F14K1212W1S2V3A4S" />
+        <beans:property name="alwaysRemember" value="false"></beans:property>
+        <beans:property name="tokenValiditySeconds" value="86400"></beans:property>
+        <beans:property name="parameter" value="_spring_security_remember_me"></beans:property>
+    </beans:bean>
+
+    <beans:bean id="rememberMeAuthenticationProvider"
+                class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+        <beans:property name="key" value="Q1F1A1O1D1N2F14K1212W1S2V3A4S" />
+    </beans:bean>
+
+    <!-- 登出过滤器 -->
+    <beans:bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <beans:property name="filterProcessesUrl" value="/logout"></beans:property>
+        <beans:constructor-arg index="0" type="java.lang.String" value="/login/loginPage"/>
+        <beans:constructor-arg index="1" type="org.springframework.security.web.authentication.logout.LogoutHandler[]">
+            <beans:list>
+                <beans:bean class="org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler">
+                    <beans:constructor-arg>
+                        <beans:list>
+                            <beans:value>Q1F1A1O1D1N2F14K1212W1S2V3A4S</beans:value>
+                            <beans:value>SPRING_SECURITY_REMEMBER_ME_COOKIE</beans:value>
+                        </beans:list>
+                    </beans:constructor-arg>
+                </beans:bean>
+                <beans:bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+            </beans:list>
+        </beans:constructor-arg>
+    </beans:bean>
+
+    <!-- 自定义filter，登录验证器 -->
+    <beans:bean id="loginFilter"
+                class="com.wing.framework.security.VasUsernamePasswordAuthenticationFilter">
+        <!-- 处理登录的action -->
+        <beans:property name="filterProcessesUrl" value="/j_spring_security_check" />
+        <!-- 验证成功后的处理-->
+        <beans:property name="authenticationSuccessHandler" ref="loginSuccessHandler" />
+        <!-- 验证失败后的处理-->
+        <beans:property name="authenticationFailureHandler" ref="vasFailureHandler" />
+        <beans:property name="authenticationManager" ref="authenticationManager" />
+
+        <!-- 记住密码 -->
+        <beans:property name="rememberMeServices" ref="rememberMeServices"></beans:property>
+    </beans:bean>
+
+    <!-- 异常登录处理 -->
+    <beans:bean id="vasFailureHandler"
+            class="com.wing.framework.security.LoginFailureHandler">
+        <beans:property name="useForward" value="true" />
+        <beans:property name="defaultFailureUrl" value="/login/error" />
+    </beans:bean>
+
+    <!-- 正常登录处理 -->
+    <beans:bean id="loginSuccessHandler"
+            class="com.wing.framework.security.LoginSuccessHandler">
+        <beans:property name="successUrl" value="/login/success" />
+        <beans:property name="defaultTargetUrl" value="/main.jsp"/>
+    </beans:bean>
+
+    <!-- 未登录的切入点 -->
+    <!--<beans:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">-->
+        <!--<beans:property name="loginFormUrl" value="/login/loginPage" />-->
+    <!--</beans:bean>-->
+    <beans:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <beans:property name="loginFormUrl" value="/login.jsp" />
+    </beans:bean>
+
+    <!-- 自定义权限不足处理程序 -->
+    <beans:bean id="accessDeniedHandler" class="com.wing.framework.security.VasAccessDeniedHandler">
+        <beans:property name="errorPage" value="/accessDenied.jsp"></beans:property>
+    </beans:bean>
+
+    <!-- 异常处理过滤器 -->
+    <beans:bean id="exceptionTranslationFilter"
+          class="org.springframework.security.web.access.ExceptionTranslationFilter">
+        <beans:property name="authenticationEntryPoint"
+                  ref="authenticationProcessingFilterEntryPoint" />
+        <beans:property name="accessDeniedHandler" ref="accessDeniedHandler" />
+    </beans:bean>
+</beans:beans>

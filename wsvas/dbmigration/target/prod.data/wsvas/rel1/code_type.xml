@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <preConditions>
+        <dbms type="mysql" />
+    </preConditions>
+    <changeSet id="create.table" author="panwb">
+        <createTable tableName="code_type">
+            <column name="code_type_id" type="varchar(25)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="code_type_name" type="varchar(128)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="sort_no" type="int">
+               	<constraints nullable="false"/>
+            </column>
+            <column name="remark" type="varchar(128)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

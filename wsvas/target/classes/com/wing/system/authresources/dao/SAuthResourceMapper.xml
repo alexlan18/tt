@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wing.system.authresources.dao.SAuthResourceDao">
+
+    <!-- 结果映射集 -->
+    <resultMap id="SAuthResourceMap" type="com.wing.system.authresources.model.SAuthResource">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="auth_id" jdbcType="VARCHAR" property="authId"/>
+        <result column="resource_id" jdbcType="VARCHAR" property="resourceId"/>
+    </resultMap>
+
+    <!--  授权资源视图  -->
+    <resultMap id="AuthResourceViewMap" type="com.wing.system.authresources.model.AuthResourceView">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="resource_id" jdbcType="VARCHAR" property="resourceId"/>
+        <result column="resource_name" jdbcType="VARCHAR" property="resourceName"/>
+        <result column="resource_type" jdbcType="CHAR" property="resourceType"/>
+        <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl"/>
+        <result column="auth_flag" jdbcType="BOOLEAN" property="authFlag"/>
+    </resultMap>
+
+    <!-- 查询数据 -->
+    <select id="querySAuthResource" resultMap="SAuthResourceMap">
+    <![CDATA[
+        select
+            id,
+            auth_id,
+            resource_id
+        from
+            s_auth_resources
+        where
+            1 = 1
+    ]]>
+    <if test="params.id != null">
+    <![CDATA[
+        and id = #{params.id}
+    ]]>
+    </if>
+    <if test="params.authId != null and params.authId neq ''">
+    <![CDATA[
+        and auth_id like concat('%', #{params.authId}, '%')
+    ]]>
+    </if>
+    <if test="params.resourceId != null and params.resourceId neq ''">
+    <![CDATA[
+        and resource_id like concat('%', #{params.resourceId}, '%')
+    ]]>
+    </if>
+    <if test="sortname != null and sortorder != null">
+        order by ${sortname} ${sortorder}
+    </if>
+    <if test="sortname != null and sortorder == null">
+        order by ${sortname} asc
+    </if>
+    </select>
+
+    <!-- 查询授权资源视图 -->
+    <select id="queryAllResourcesByAuth" resultMap="AuthResourceViewMap">
+    <![CDATA[
+        select
+            a.id,
+            a.resource_id,
+            a.resource_name,
+            a.resource_type,
+            a.resource_url,
+            case when b.auth_id = #{authId} then true else false end as auth_flag
+        from
+            s_resources a
+        left join
+            s_auth_resources b
+        on
+            a.resource_id = b.resource_id
+            and b.auth_id = #{authId}
+    ]]>
+    </select>
+
+    <!-- 选择性插入数据 -->
+    <insert id="insert" parameterType="com.wing.system.authresources.model.SAuthResource">
+    <![CDATA[
+        insert into s_auth_resources
+    ]]>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            id,
+        ]]>
+        </if>
+        <if test="authId != null">
+        <![CDATA[
+            auth_id,
+        ]]>
+        </if>
+        <if test="resourceId != null">
+        <![CDATA[
+            resource_id,
+        ]]>
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            #{id, jdbcType=INT},
+        ]]>
+        </if>
+        <if test="authId != null">
+        <![CDATA[
+            #{authId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="resourceId != null">
+        <![CDATA[
+            #{resourceId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </trim>
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+    <![CDATA[
+        delete from s_auth_resources where id = #{id}
+    ]]>
+    </delete>
+
+    <!-- 删除授权关系 -->
+    <delete id="deleteAuth">
+    <![CDATA[
+        delete from s_auth_resources where auth_id = #{authId} and resource_id = #{resourceId}
+    ]]>
+    </delete>
+
+    <!-- 更新数据 -->
+    <update id="update" parameterType="com.wing.system.authresources.model.SAuthResource">
+    <![CDATA[
+        update s_auth_resources
+    ]]>
+    <set>
+        <if test="id != null">
+            <![CDATA[
+            id = #{id, jdbcType=INT},
+        ]]>
+        </if>
+        <if test="authId != null">
+            <![CDATA[
+            auth_id = #{authId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="resourceId != null">
+            <![CDATA[
+            resource_id = #{resourceId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </set>
+    where id = #{id}
+    </update>
+
+    <!-- 根据ID获取数据 -->
+    <select id="getSAuthResourceById" resultMap="SAuthResourceMap">
+    <![CDATA[
+        select
+            id,
+            auth_id,
+            resource_id
+        from
+            s_auth_resources
+        where
+            id = #{id}
+    ]]>
+    </select>
+
+    <!-- 根据权限获取 -->
+    <select id="queryResourcesByAuth" resultType="java.lang.String">
+    <![CDATA[
+        select
+            b.resource_url
+        from
+            s_auth_resources a
+        inner join
+            s_resources b
+        on
+            a.resource_id = b.resource_id
+        where
+            auth_id = #{authId}
+    ]]>
+    </select>
+</mapper>

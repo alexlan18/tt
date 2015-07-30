@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<!--userid: admin pwd:1-->
+
+
+  <changeSet id="1" author="lhm">
+        <sql>
+            INSERT INTO `s_users` (`id`,`login_name`,`password`,`user_name`,`enabled`,`department`,`email`,`telphone`,`area_code`,`is_sys`) VALUES (1,'admin','c4ca4238a0b923820dcc509a6f75849b',NULL,NULL,NULL,NULL,NULL,NULL,'1');
+            INSERT INTO `s_menus` (`id`,`menu_id`,`menu_name`,`parent_menu_id`,`menu_url`,`icon_url`,`sort_no`,`is_visible`,`remarks`) VALUES (1,'root','根目录','ROOT_MENU','/',NULL,NULL,NULL,NULL);
+            INSERT INTO `s_menus` (`id`,`menu_id`,`menu_name`,`parent_menu_id`,`menu_url`,`icon_url`,`sort_no`,`is_visible`,`remarks`) VALUES (2,'users','用户管理','sysconfig','/system/sUser',NULL,NULL,'1',NULL);
+            INSERT INTO `s_menus` (`id`,`menu_id`,`menu_name`,`parent_menu_id`,`menu_url`,`icon_url`,`sort_no`,`is_visible`,`remarks`) VALUES (3,'codeInfo','字典','sysconfig','/system/sCodeInfo',NULL,NULL,NULL,NULL);
+            INSERT INTO `s_menus` (`id`,`menu_id`,`menu_name`,`parent_menu_id`,`menu_url`,`icon_url`,`sort_no`,`is_visible`,`remarks`) VALUES (4,'codeType','字典类型','sysconfig','/system/sCodeType',NULL,NULL,NULL,NULL);
+            INSERT INTO `s_menus` (`id`,`menu_id`,`menu_name`,`parent_menu_id`,`menu_url`,`icon_url`,`sort_no`,`is_visible`,`remarks`) VALUES (5,'sysconfig','系统管理','ROOT_MENU',NULL,NULL,NULL,NULL,NULL);
+            INSERT INTO `s_menus` (`id`,`menu_id`,`menu_name`,`parent_menu_id`,`menu_url`,`icon_url`,`sort_no`,`is_visible`,`remarks`) VALUES (6,'SKeyGenerator','SKeyGenerator','sysconfig','/system/sKeyGenerator',NULL,NULL,NULL,NULL);
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>

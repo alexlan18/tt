@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wing.system.codetype.dao.SCodeTypeDao">
+
+    <!-- 结果映射集 -->
+    <resultMap id="SCodeTypeMap" type="com.wing.system.codetype.model.SCodeType">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="code_type_id" jdbcType="VARCHAR" property="codeTypeId"/>
+        <result column="code_type_name" jdbcType="VARCHAR" property="codeTypeName"/>
+        <result column="sort_no" jdbcType="INTEGER" property="sortNo"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <!-- 查询数据 -->
+    <select id="querySCodeType" resultMap="SCodeTypeMap">
+    <![CDATA[
+        select
+            id,
+            code_type_id,
+            code_type_name,
+            sort_no,
+            remark
+        from
+            s_code_type
+        where
+            1 = 1
+    ]]>
+    <if test="params.id != null">
+    <![CDATA[
+        and id = #{params.id}
+    ]]>
+    </if>
+    <if test="params.codeTypeId != null and params.codeTypeId neq ''">
+    <![CDATA[
+        and code_type_id like concat('%', #{params.codeTypeId}, '%')
+    ]]>
+    </if>
+    <if test="params.codeTypeName != null and params.codeTypeName neq ''">
+    <![CDATA[
+        and code_type_name like concat('%', #{params.codeTypeName}, '%')
+    ]]>
+    </if>
+    <if test="params.sortNo != null">
+    <![CDATA[
+        and sort_no = #{params.sortNo}
+    ]]>
+    </if>
+    <if test="params.remark != null and params.remark neq ''">
+    <![CDATA[
+        and remark like concat('%', #{params.remark}, '%')
+    ]]>
+    </if>
+    <if test="sortname != null and sortorder != null">
+        order by ${sortname} ${sortorder}
+    </if>
+    <if test="sortname != null and sortorder == null">
+        order by ${sortname} asc
+    </if>
+    </select>
+
+    <!-- 获取所有代码类型 -->
+    <select id="queryAllCodeType" resultMap="SCodeTypeMap">
+    <![CDATA[
+        select * from s_code_type
+    ]]>
+    </select>
+
+    <!-- 选择性插入数据 -->
+    <insert id="insert" parameterType="com.wing.system.codetype.model.SCodeType">
+    <![CDATA[
+        insert into s_code_type
+    ]]>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            id,
+        ]]>
+        </if>
+        <if test="codeTypeId != null">
+        <![CDATA[
+            code_type_id,
+        ]]>
+        </if>
+        <if test="codeTypeName != null">
+        <![CDATA[
+            code_type_name,
+        ]]>
+        </if>
+        <if test="sortNo != null">
+        <![CDATA[
+            sort_no,
+        ]]>
+        </if>
+        <if test="remark != null">
+        <![CDATA[
+            remark,
+        ]]>
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+          #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="codeTypeId != null">
+        <![CDATA[
+          #{codeTypeId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="codeTypeName != null">
+        <![CDATA[
+          #{codeTypeName, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="sortNo != null">
+        <![CDATA[
+          #{sortNo, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="remark != null">
+        <![CDATA[
+          #{remark, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </trim>
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+    <![CDATA[
+        delete from s_code_type where id = #{id}
+    ]]>
+    </delete>
+
+    <!-- 根据Id删除代码信息 -->
+    <delete id="deleteCodeInfo">
+    <![CDATA[
+        delete from s_code_info where code_type_id in (select code_type_id from s_code_type where id = #{id})
+    ]]>
+    </delete>
+
+    <!-- 更新数据 -->
+    <update id="update" parameterType="com.wing.system.codetype.model.SCodeType">
+    <![CDATA[
+        update s_code_type
+    ]]>
+    <set>
+        <if test="id != null">
+        <![CDATA[
+            id = #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="codeTypeId != null">
+        <![CDATA[
+            code_type_id = #{codeTypeId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="codeTypeName != null">
+        <![CDATA[
+            code_type_name = #{codeTypeName, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="sortNo != null">
+        <![CDATA[
+            sort_no = #{sortNo, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="remark != null">
+        <![CDATA[
+            remark = #{remark, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </set>
+    where id = #{id}
+    </update>
+
+    <!-- 根据ID获取数据 -->
+    <select id="getSCodeTypeById" resultMap="SCodeTypeMap">
+    <![CDATA[
+        select
+            id,
+            code_type_id,
+            code_type_name,
+            sort_no,
+            remark
+        from
+            s_code_type
+        where
+            id = #{id}
+    ]]>
+    </select>
+</mapper>

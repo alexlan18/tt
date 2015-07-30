@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	<include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/code_info.xml" />
+	<include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/code_type.xml" />
+	<include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/menu_role.xml" />
+	<include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/menu.xml" />
+	<include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/roles.xml" />
+	<include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/user_role.xml" />
+	<include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/users.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_auth_data.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_code_info.xml" />
+
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_auth_resources.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_code_type.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_key_generator.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_menus.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_role_auths.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_role_menus.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_roles.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_user_roles.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_users.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/s_resources.xml" />
+    <include file="F:\GitHub\test\wsvas\dbmigration/target/prod.data/wsvas/rel1/initData.xml" />
+
+</databaseChangeLog>

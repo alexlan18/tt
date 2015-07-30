@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wing.system.menus.dao.SMenusDao">
+
+    <!-- 结果映射集 -->
+    <resultMap id="SMenusMap" type="com.wing.system.menus.model.SMenus">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="menu_id" jdbcType="VARCHAR" property="menuId"/>
+        <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+        <result column="parent_menu_id" jdbcType="VARCHAR" property="parentMenuId"/>
+        <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
+        <result column="icon_url" jdbcType="VARCHAR" property="iconUrl"/>
+        <result column="sort_no" jdbcType="INTEGER" property="sortNo"/>
+        <result column="is_visible" jdbcType="CHAR" property="isVisible"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+    </resultMap>
+
+    <!-- 查询数据 -->
+    <select id="querySMenus" resultMap="SMenusMap">
+    <![CDATA[
+        select
+            id,
+            menu_id,
+            menu_name,
+            parent_menu_id,
+            menu_url,
+            icon_url,
+            sort_no,
+            is_visible,
+            remarks
+        from
+            s_menus
+        where
+            1 = 1
+    ]]>
+    <if test="params.id != null">
+    <![CDATA[
+        and id = #{params.id}
+    ]]>
+    </if>
+    <if test="params.menuId != null and params.menuId neq ''">
+    <![CDATA[
+        and menu_id like concat('%', #{params.menuId}, '%')
+    ]]>
+    </if>
+    <if test="params.menuName != null and params.menuName neq ''">
+    <![CDATA[
+        and menu_name like concat('%', #{params.menuName}, '%')
+    ]]>
+    </if>
+    <if test="params.parentMenuId != null and params.parentMenuId neq ''">
+    <![CDATA[
+        and parent_menu_id like concat('%', #{params.parentMenuId}, '%')
+    ]]>
+    </if>
+    <if test="params.menuUrl != null and params.menuUrl neq ''">
+    <![CDATA[
+        and menu_url like concat('%', #{params.menuUrl}, '%')
+    ]]>
+    </if>
+    <if test="params.iconUrl != null and params.iconUrl neq ''">
+    <![CDATA[
+        and icon_url like concat('%', #{params.iconUrl}, '%')
+    ]]>
+    </if>
+    <if test="params.sortNo != null">
+    <![CDATA[
+        and sort_no = #{params.sortNo}
+    ]]>
+    </if>
+    <if test="params.isVisible != null and params.isVisible neq ''">
+    <![CDATA[
+        and is_visible like concat('%', #{params.isVisible}, '%')
+    ]]>
+    </if>
+    <if test="params.remarks != null and params.remarks neq ''">
+    <![CDATA[
+        and remarks like concat('%', #{params.remarks}, '%')
+    ]]>
+    </if>
+    <if test="sortname != null and sortorder != null">
+        order by ${sortname} ${sortorder}
+    </if>
+    <if test="sortname != null and sortorder == null">
+        order by ${sortname} asc
+    </if>
+    </select>
+
+    <!-- 根据角色ID，获取菜单信息 -->
+    <select id="querySMenusByRole" resultType="java.lang.String">
+    <![CDATA[
+        select
+            b.menu_id
+        from
+            s_role_menus a
+        inner join
+            s_menus b
+        on
+            a.menu_id = b.menu_id
+        where
+            a.role_id = #{roleId}
+        order by sort_no
+        ]]>
+    </select>
+
+    <!-- 选择性插入数据 -->
+    <insert id="insert" parameterType="com.wing.system.menus.model.SMenus">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+        SELECT LAST_INSERT_ID() AS id
+    </selectKey>
+    <![CDATA[
+        insert into s_menus
+    ]]>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            id,
+        ]]>
+        </if>
+        <if test="menuId != null">
+        <![CDATA[
+            menu_id,
+        ]]>
+        </if>
+        <if test="menuName != null">
+        <![CDATA[
+            menu_name,
+        ]]>
+        </if>
+        <if test="parentMenuId != null">
+        <![CDATA[
+            parent_menu_id,
+        ]]>
+        </if>
+        <if test="menuUrl != null">
+        <![CDATA[
+            menu_url,
+        ]]>
+        </if>
+        <if test="iconUrl != null">
+        <![CDATA[
+            icon_url,
+        ]]>
+        </if>
+        <if test="sortNo != null">
+        <![CDATA[
+            sort_no,
+        ]]>
+        </if>
+        <if test="isVisible != null">
+        <![CDATA[
+            is_visible,
+        ]]>
+        </if>
+        <if test="remarks != null">
+        <![CDATA[
+            remarks,
+        ]]>
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="menuId != null">
+        <![CDATA[
+            #{menuId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="menuName != null">
+        <![CDATA[
+            #{menuName, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="parentMenuId != null">
+        <![CDATA[
+            #{parentMenuId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="menuUrl != null">
+        <![CDATA[
+            #{menuUrl, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="iconUrl != null">
+        <![CDATA[
+            #{iconUrl, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="sortNo != null">
+        <![CDATA[
+            #{sortNo, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="isVisible != null">
+        <![CDATA[
+            #{isVisible, jdbcType=CHAR},
+        ]]>
+        </if>
+        <if test="remarks != null">
+        <![CDATA[
+            #{remarks, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </trim>
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+    <![CDATA[
+        delete from s_menus where id = #{id}
+    ]]>
+    </delete>
+
+    <!-- 根据父节点菜单ID，删除菜单信息 -->
+    <delete id="deleteByParentMenuId">
+    <![CDATA[
+        delete from s_menus where parent_menu_id = #{parentMenuId}
+    ]]>
+    </delete>
+
+    <!-- 更新数据 -->
+    <update id="update" parameterType="com.wing.system.menus.model.SMenus">
+    <![CDATA[
+        update s_menus
+    ]]>
+    <set>
+        <if test="id != null">
+            <![CDATA[
+            id = #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="menuId != null">
+            <![CDATA[
+            menu_id = #{menuId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="menuName != null">
+            <![CDATA[
+            menu_name = #{menuName, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="parentMenuId != null">
+            <![CDATA[
+            parent_menu_id = #{parentMenuId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="menuUrl != null">
+            <![CDATA[
+            menu_url = #{menuUrl, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="iconUrl != null">
+            <![CDATA[
+            icon_url = #{iconUrl, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="sortNo != null">
+            <![CDATA[
+            sort_no = #{sortNo, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="isVisible != null">
+            <![CDATA[
+            is_visible = #{isVisible, jdbcType=CHAR},
+        ]]>
+        </if>
+        <if test="remarks != null">
+            <![CDATA[
+            remarks = #{remarks, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </set>
+    where id = #{id}
+    </update>
+
+    <!-- 根据ID获取数据 -->
+    <select id="getSMenusById" resultMap="SMenusMap">
+    <![CDATA[
+        select
+            id,
+            menu_id,
+            menu_name,
+            parent_menu_id,
+            menu_url,
+            icon_url,
+            sort_no,
+            is_visible,
+            remarks
+        from
+            s_menus
+        where
+            id = #{id}
+        order by sort_no
+    ]]>
+    </select>
+
+    <select id="queryMenusByParent" resultMap="SMenusMap">
+    <![CDATA[
+        select
+            id,
+            menu_id,
+            menu_name,
+            parent_menu_id,
+            menu_url,
+            icon_url,
+            sort_no,
+            is_visible,
+            remarks
+        from
+            s_menus
+        where
+            parent_menu_id = #{parentMenuId}
+        order by sort_no
+    ]]>
+    </select>
+
+    <!-- 根据菜单ID、用户ID查询子菜单信息 -->
+    <select id="queryMenusByParentUserId" resultMap="SMenusMap">
+    <![CDATA[
+        select
+          a.*
+        from
+          s_menus a inner join (
+              (
+                select a.menu_id from s_role_menus a inner join s_user_roles b on a.role_id = b.role_id where b.user_id = #{userId}
+              )
+                union
+              (
+                select distinct parent_menu_id from s_menus where menu_id in
+                 (select a.menu_id from s_role_menus a inner join s_user_roles b on a.role_id = b.role_id where b.user_id = #{userId})
+              )
+            ) b on a.menu_id = b.menu_id
+        where
+          a.parent_menu_id = #{parentMenuId}
+        order by a.sort_no
+    ]]>
+    </select>
+</mapper>

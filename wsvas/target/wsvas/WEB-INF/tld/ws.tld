@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>     
+	<tlibversion>1.0</tlibversion>     
+	<jspversion>1.1</jspversion>
+	<shortname>ws</shortname>
+	<!-- 标签库唯一访问标识符 -->
+ 	<uri>/ws</uri>
+	<tag>      
+		<name>page</name>      
+		<tagclass>com.chinanetcenter.framework.tag.PageTag</tagclass>      
+		<bodycontent>empty</bodycontent>      
+		<!-- 定义属性 -->      
+		<attribute>
+			<!-- 要链接到的action -->          
+			<name>action</name> 
+			<type>java.lang.String</type> 
+			<required>true</required>  
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 属性名字 Page分页对象-->          
+			<name>page</name> 
+			<!-- 属性类型 -->    
+			<type>java.lang.Object</type>
+			<!-- 是否必须 -->   
+			<required>true</required>
+			<!-- 表示是否可以使用JSP表达式  -->  
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 属性名字 Page分页对象-->          
+			<name>params</name> 
+			<!-- 属性类型 -->    
+			<type>java.lang.Object</type>
+			<!-- 是否必须 -->   
+			<required>false</required>
+			<!-- 表示是否可以使用JSP表达式  -->  
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<!-- 标签名 -->      
+		<name>codeSelect</name>      
+		<tagclass>com.chinanetcenter.framework.tag.CodeSelectTag</tagclass>   
+		<!-- 如果不需要标签体则设置empty，反之设定jsp -->
+		<bodycontent>empty</bodycontent>      
+		<!-- 定义标签属性 -->      
+		<attribute>
+			<!-- 指定select标签的name属性 -->          
+			<name>selectName</name> 
+			<type>java.lang.String</type>
+			<!-- 是否必须 -->
+			<required>true</required>
+			<!-- 是否可在属性中使用表达式 -->  
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 指定select标签的id属性 -->          
+			<name>selectId</name> 
+			<type>java.lang.String</type>
+			<!-- 是否必须 -->
+			<required>false</required>
+			<!-- 是否可在属性中使用表达式 -->  
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 指定代码类型id，用以取数据构成option-->          
+			<name>codeTypeId</name> 
+			<!-- 属性类型 -->    
+			<type>java.lang.String</type>
+			<!-- 是否必须 -->   
+			<required>true</required>
+			<!-- 表示是否可以使用JSP表达式  -->  
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 当option的value与该值相等时该option被选定 -->          
+			<name>selectedValue</name> 
+			<!-- 属性类型 -->    
+			<type>java.lang.String</type>
+			<!-- 若没有指定该属性，则默认option被选定 -->   
+			<required>false</required>
+			<!-- 表示是否可以使用JSP表达式  -->  
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>		
+	</tag>	
+	<tag>
+		<!-- 标签名 -->      
+		<name>codeCont</name>      
+		<tagclass>com.chinanetcenter.framework.tag.CodeContTag</tagclass>   
+		<!-- 如果不需要标签体则设置empty，反之设定jsp -->
+		<bodycontent>empty</bodycontent>      
+		<!-- 定义标签属性 -->      
+		<attribute>
+			<name>codeTypeId</name> 
+			<type>java.lang.String</type>
+			<!-- 是否必须 -->
+			<required>true</required>
+			<!-- 是否可在属性中使用表达式 -->  
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>value</name> 
+			<type>java.lang.String</type>
+			<!-- 是否必须 -->
+			<required>true</required>
+			<!-- 是否可在属性中使用表达式 -->  
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag> 
+	
+	<tag>
+		<!-- 标签名 -->      
+		<name>area</name>      
+		<tagclass>com.chinanetcenter.framework.tag.AreaTag</tagclass>   
+		<!-- 如果不需要标签体则设置empty，反之设定jsp -->
+		<bodycontent>empty</bodycontent>      
+		<!-- 定义标签属性 -->      
+		<attribute>
+			<name>areaCode</name> 
+			<type>java.lang.String</type>
+			<!-- 是否必须 -->
+			<required>true</required>
+			<!-- 是否可在属性中使用表达式 -->  
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag> 
+</taglib>

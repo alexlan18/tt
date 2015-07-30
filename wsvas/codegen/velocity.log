@@ -1,0 +1,246 @@
+2014-06-25 16:05:28,905 - ************************************************************** 
+2014-06-25 16:05:28,905 - Starting Jakarta Velocity v1.4-dev
+2014-06-25 16:05:28,905 - RuntimeInstance initializing.
+2014-06-25 16:05:28,906 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2014-06-25 16:05:28,906 - Trying to use logger class middlegen.DontCloseLog4JLogSystem
+2014-06-25 16:05:28,906 - Using logger class middlegen.DontCloseLog4JLogSystem
+2014-06-25 16:05:28,907 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2014-06-25 16:05:28,907 - Resource Loader Instantiated: middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - FileResourceLoader : adding path '.'
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization complete.
+2014-06-25 16:05:28,908 - ClasspathResourceLoader : initialization starting.
+2014-06-25 16:05:28,909 - ClasspathResourceLoader : initialization complete.
+2014-06-25 16:05:28,909 - ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2014-06-25 16:05:28,909 - Default ResourceManager initialization complete.
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-06-25 16:05:28,945 - Created: 20 parsers.
+2014-06-25 16:05:28,945 - Velocimacro : initialization starting.
+2014-06-25 16:05:28,945 - Velocimacro : adding VMs from VM library template : VM_global_library.vm
+2014-06-25 16:05:28,946 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2014-06-25 16:05:28,947 - ResourceManager : found VM_global_library.vm with loader middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,947 - Velocimacro :  VM library template macro registration complete.
+2014-06-25 16:05:28,947 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+2014-06-25 16:05:28,949 - Velocimacro : messages on  : VM system will output logging messages
+2014-06-25 16:05:28,949 - Velocimacro : autoload off  : VM system will not automatically reload global library macros
+2014-06-25 16:05:28,950 - Velocimacro : initialization complete.
+2014-06-25 16:05:28,950 - Velocity successfully started.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 30] : ${sortorder} is not a valid reference.
+2014-06-25 16:05:29,012 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 79,column 18] : ${sortname} is not a valid reference.
+.resource.ResourceManagerImpl)
+2014-06-25 16:05:28,907 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2014-06-25 16:05:28,907 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2014-06-25 16:05:28,907 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2014-06-25 16:05:28,907 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2014-06-25 16:05:28,907 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2014-06-25 16:05:28,907 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2014-06-25 16:05:28,907 - Resource Loader Instantiated: middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,907 - Resource Loader Instantiated: middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,907 - Resource Loader Instantiated: middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,907 - Resource Loader Instantiated: middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,907 - Resource Loader Instantiated: middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,907 - Resource Loader Instantiated: middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,907 - Resource Loader Instantiated: middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - FileResourceLoader : adding path '.'
+2014-06-25 16:05:28,908 - FileResourceLoader : adding path '.'
+2014-06-25 16:05:28,908 - FileResourceLoader : adding path '.'
+2014-06-25 16:05:28,908 - FileResourceLoader : adding path '.'
+2014-06-25 16:05:28,908 - FileResourceLoader : adding path '.'
+2014-06-25 16:05:28,908 - FileResourceLoader : adding path '.'
+2014-06-25 16:05:28,908 - FileResourceLoader : adding path '.'
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization complete.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization complete.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization complete.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization complete.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization complete.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization complete.
+2014-06-25 16:05:28,908 - FileResourceLoader : initialization complete.
+2014-06-25 16:05:28,908 - ClasspathResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - ClasspathResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - ClasspathResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - ClasspathResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - ClasspathResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - ClasspathResourceLoader : initialization starting.
+2014-06-25 16:05:28,908 - ClasspathResourceLoader : initialization starting.
+2014-06-25 16:05:28,909 - ClasspathResourceLoader : initialization complete.
+2014-06-25 16:05:28,909 - ClasspathResourceLoader : initialization complete.
+2014-06-25 16:05:28,909 - ClasspathResourceLoader : initialization complete.
+2014-06-25 16:05:28,909 - ClasspathResourceLoader : initialization complete.
+2014-06-25 16:05:28,909 - ClasspathResourceLoader : initialization complete.
+2014-06-25 16:05:28,909 - ClasspathResourceLoader : initialization complete.
+2014-06-25 16:05:28,909 - ClasspathResourceLoader : initialization complete.
+2014-06-25 16:05:28,909 - ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2014-06-25 16:05:28,909 - ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2014-06-25 16:05:28,909 - ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2014-06-25 16:05:28,909 - ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2014-06-25 16:05:28,909 - ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2014-06-25 16:05:28,909 - ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2014-06-25 16:05:28,909 - ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2014-06-25 16:05:28,909 - Default ResourceManager initialization complete.
+2014-06-25 16:05:28,909 - Default ResourceManager initialization complete.
+2014-06-25 16:05:28,909 - Default ResourceManager initialization complete.
+2014-06-25 16:05:28,909 - Default ResourceManager initialization complete.
+2014-06-25 16:05:28,909 - Default ResourceManager initialization complete.
+2014-06-25 16:05:28,909 - Default ResourceManager initialization complete.
+2014-06-25 16:05:28,909 - Default ResourceManager initialization complete.
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-06-25 16:05:28,910 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-06-25 16:05:28,911 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2014-06-25 16:05:28,945 - Created: 20 parsers.
+2014-06-25 16:05:28,945 - Created: 20 parsers.
+2014-06-25 16:05:28,945 - Created: 20 parsers.
+2014-06-25 16:05:28,945 - Created: 20 parsers.
+2014-06-25 16:05:28,945 - Created: 20 parsers.
+2014-06-25 16:05:28,945 - Created: 20 parsers.
+2014-06-25 16:05:28,945 - Created: 20 parsers.
+2014-06-25 16:05:28,945 - Velocimacro : initialization starting.
+2014-06-25 16:05:28,945 - Velocimacro : initialization starting.
+2014-06-25 16:05:28,945 - Velocimacro : initialization starting.
+2014-06-25 16:05:28,945 - Velocimacro : initialization starting.
+2014-06-25 16:05:28,945 - Velocimacro : initialization starting.
+2014-06-25 16:05:28,945 - Velocimacro : initialization starting.
+2014-06-25 16:05:28,945 - Velocimacro : initialization starting.
+2014-06-25 16:05:28,945 - Velocimacro : adding VMs from VM library template : VM_global_library.vm
+2014-06-25 16:05:28,945 - Velocimacro : adding VMs from VM library template : VM_global_library.vm
+2014-06-25 16:05:28,945 - Velocimacro : adding VMs from VM library template : VM_global_library.vm
+2014-06-25 16:05:28,945 - Velocimacro : adding VMs from VM library template : VM_global_library.vm
+2014-06-25 16:05:28,945 - Velocimacro : adding VMs from VM library template : VM_global_library.vm
+2014-06-25 16:05:28,945 - Velocimacro : adding VMs from VM library template : VM_global_library.vm
+2014-06-25 16:05:28,945 - Velocimacro : adding VMs from VM library template : VM_global_library.vm
+2014-06-25 16:05:28,946 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2014-06-25 16:05:28,946 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2014-06-25 16:05:28,946 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2014-06-25 16:05:28,946 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2014-06-25 16:05:28,946 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2014-06-25 16:05:28,946 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2014-06-25 16:05:28,946 - KindFileResourceLoader : file loader failed to load: VM_global_library.vm
+2014-06-25 16:05:28,947 - ResourceManager : found VM_global_library.vm with loader middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,947 - ResourceManager : found VM_global_library.vm with loader middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,947 - ResourceManager : found VM_global_library.vm with loader middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,947 - ResourceManager : found VM_global_library.vm with loader middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,947 - ResourceManager : found VM_global_library.vm with loader middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,947 - ResourceManager : found VM_global_library.vm with loader middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,947 - ResourceManager : found VM_global_library.vm with loader middlegen.KindFileResourceLoader
+2014-06-25 16:05:28,947 - Velocimacro :  VM library template macro registration complete.
+2014-06-25 16:05:28,947 - Velocimacro :  VM library template macro registration complete.
+2014-06-25 16:05:28,947 - Velocimacro :  VM library template macro registration complete.
+2014-06-25 16:05:28,947 - Velocimacro :  VM library template macro registration complete.
+2014-06-25 16:05:28,947 - Velocimacro :  VM library template macro registration complete.
+2014-06-25 16:05:28,947 - Velocimacro :  VM library template macro registration complete.
+2014-06-25 16:05:28,947 - Velocimacro :  VM library template macro registration complete.
+2014-06-25 16:05:28,947 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-06-25 16:05:28,947 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-06-25 16:05:28,947 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-06-25 16:05:28,947 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-06-25 16:05:28,947 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-06-25 16:05:28,947 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-06-25 16:05:28,947 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+2014-06-25 16:05:28,949 - Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+2014-06-25 16:05:28,949 - Velocimacro : messages on  : VM system will output logging messages
+2014-06-25 16:05:28,949 - Velocimacro : messages on  : VM system will output logging messages
+2014-06-25 16:05:28,949 - Velocimacro : messages on  : VM system will output logging messages
+2014-06-25 16:05:28,949 - Velocimacro : messages on  : VM system will output logging messages
+2014-06-25 16:05:28,949 - Velocimacro : messages on  : VM system will output logging messages
+2014-06-25 16:05:28,949 - Velocimacro : messages on  : VM system will output logging messages
+2014-06-25 16:05:28,949 - Velocimacro : messages on  : VM system will output logging messages
+2014-06-25 16:05:28,949 - Velocimacro : autoload off  : VM system will not automatically reload global library macros
+2014-06-25 16:05:28,949 - Velocimacro : autoload off  : VM system will not automatically reload global library macros
+2014-06-25 16:05:28,949 - Velocimacro : autoload off  : VM system will not automatically reload global library macros
+2014-06-25 16:05:28,949 - Velocimacro : autoload off  : VM system will not automatically reload global library macros
+2014-06-25 16:05:28,949 - Velocimacro : autoload off  : VM system will not automatically reload global library macros
+2014-06-25 16:05:28,949 - Velocimacro : autoload off  : VM system will not automatically reload global library macros
+2014-06-25 16:05:28,949 - Velocimacro : autoload off  : VM system will not automatically reload global library macros
+2014-06-25 16:05:28,950 - Velocimacro : initialization complete.
+2014-06-25 16:05:28,950 - Velocimacro : initialization complete.
+2014-06-25 16:05:28,950 - Velocimacro : initialization complete.
+2014-06-25 16:05:28,950 - Velocimacro : initialization complete.
+2014-06-25 16:05:28,950 - Velocimacro : initialization complete.
+2014-06-25 16:05:28,950 - Velocimacro : initialization complete.
+2014-06-25 16:05:28,950 - Velocimacro : initialization complete.
+2014-06-25 16:05:28,950 - Velocity successfully started.
+2014-06-25 16:05:28,950 - Velocity successfully started.
+2014-06-25 16:05:28,950 - Velocity successfully started.
+2014-06-25 16:05:28,950 - Velocity successfully started.
+2014-06-25 16:05:28,950 - Velocity successfully started.
+2014-06-25 16:05:28,950 - Velocity successfully started.
+2014-06-25 16:05:28,950 - Velocity successfully started.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 30] : ${sortorder} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 30] : ${sortorder} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 30] : ${sortorder} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 30] : ${sortorder} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 30] : ${sortorder} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 30] : ${sortorder} is not a valid reference.
+2014-06-25 16:05:29,011 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 76,column 30] : ${sortorder} is not a valid reference.
+2014-06-25 16:05:29,012 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 79,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,012 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 79,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,012 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 79,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,012 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 79,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,012 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 79,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,012 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 79,column 18] : ${sortname} is not a valid reference.
+2014-06-25 16:05:29,012 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = middlegen [line 79,column 18] : ${sortname} is not a valid reference.

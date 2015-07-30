@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wing.system.roles.dao.SRoleDao">
+
+    <!-- 结果映射集 -->
+    <resultMap id="SRoleMap" type="com.wing.system.roles.model.SRole">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="enabled" jdbcType="CHAR" property="enabled"/>
+        <result column="is_sys" jdbcType="CHAR" property="isSys"/>
+    </resultMap>
+
+    <!-- 查询数据 -->
+    <select id="querySRole" resultMap="SRoleMap">
+    <![CDATA[
+        select
+            id,
+            role_id,
+            role_name,
+            enabled,
+            is_sys
+        from
+            s_roles
+        where
+            1 = 1
+    ]]>
+    <if test="params.id != null">
+    <![CDATA[
+        and id = #{params.id}
+    ]]>
+    </if>
+    <if test="params.roleId != null and params.roleId neq ''">
+    <![CDATA[
+        and role_id like concat('%', #{params.roleId}, '%')
+    ]]>
+    </if>
+    <if test="params.roleName != null and params.roleName neq ''">
+    <![CDATA[
+        and role_name like concat('%', #{params.roleName}, '%')
+    ]]>
+    </if>
+    <if test="params.enabled != null and params.enabled neq ''">
+    <![CDATA[
+        and enabled like concat('%', #{params.enabled}, '%')
+    ]]>
+    </if>
+    <if test="params.isSys != null and params.isSys neq ''">
+    <![CDATA[
+        and is_sys like concat('%', #{params.isSys}, '%')
+    ]]>
+    </if>
+    <if test="sortname != null and sortorder != null">
+        order by ${sortname} ${sortorder}
+    </if>
+    <if test="sortname != null and sortorder == null">
+        order by ${sortname} asc
+    </if>
+    </select>
+
+    <!-- 选择性插入数据 -->
+    <insert id="insert" parameterType="com.wing.system.roles.model.SRole">
+    <![CDATA[
+        insert into s_roles
+    ]]>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            id,
+        ]]>
+        </if>
+        <if test="roleId != null">
+        <![CDATA[
+            role_id,
+        ]]>
+        </if>
+        <if test="roleName != null">
+        <![CDATA[
+            role_name,
+        ]]>
+        </if>
+        <if test="enabled != null">
+        <![CDATA[
+            enabled,
+        ]]>
+        </if>
+        <if test="isSys != null">
+        <![CDATA[
+            is_sys,
+        ]]>
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="roleId != null">
+        <![CDATA[
+            #{roleId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="roleName != null">
+        <![CDATA[
+            #{roleName, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="enabled != null">
+        <![CDATA[
+            #{enabled, jdbcType=CHAR},
+        ]]>
+        </if>
+        <if test="isSys != null">
+        <![CDATA[
+            #{isSys, jdbcType=CHAR},
+        ]]>
+        </if>
+    </trim>
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+    <![CDATA[
+        delete from s_roles where id = #{id}
+    ]]>
+    </delete>
+
+    <!-- 更新数据 -->
+    <update id="update" parameterType="com.wing.system.roles.model.SRole">
+    <![CDATA[
+        update s_roles
+    ]]>
+    <set>
+        <if test="id != null">
+            <![CDATA[
+            id = #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="roleId != null">
+            <![CDATA[
+            role_id = #{roleId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="roleName != null">
+            <![CDATA[
+            role_name = #{roleName, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="enabled != null">
+            <![CDATA[
+            enabled = #{enabled, jdbcType=CHAR},
+        ]]>
+        </if>
+        <if test="isSys != null">
+            <![CDATA[
+            is_sys = #{isSys, jdbcType=CHAR},
+        ]]>
+        </if>
+    </set>
+    where id = #{id}
+    </update>
+
+    <!-- 根据ID获取数据 -->
+    <select id="getSRoleById" resultMap="SRoleMap">
+    <![CDATA[
+        select
+            id,
+            role_id,
+            role_name,
+            enabled,
+            is_sys
+        from
+            s_roles
+        where
+            id = #{id}
+    ]]>
+    </select>
+</mapper>

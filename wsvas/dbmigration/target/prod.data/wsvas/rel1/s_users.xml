@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <preConditions>
+        <dbms type="mysql" />
+    </preConditions>
+    <changeSet id="create.table" author="lx">
+        <createTable tableName="s_users">
+            <column autoIncrement="true" name="id" type="int" valueNumeric="1">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="login_name" type="varchar(100)" >
+            </column>
+            <column name="password" type="varchar(100)">
+            </column>
+            <column name="user_name" type="varchar(100)">
+            </column>
+            <column name="enabled" type="char(1)" >
+            </column>
+            <column name="department" type="varchar(100)">
+            </column>
+            <column name="email" type="varchar(100)" >
+            </column>
+            <column name="telphone" type="varchar(100)">
+            </column>
+            <column name="area_code" type="varchar(100)" >
+            </column>
+            <column name="is_sys" type="char(1)">
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

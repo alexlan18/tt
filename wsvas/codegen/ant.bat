@@ -1,0 +1,1 @@
+java -ms128m -mx128m -cp .;ant.jar;ant-launcher.jar;xerces.jar;xml-apis.jar org.apache.tools.ant.Main

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wing.system.rolemenus.dao.SRoleMenusDao">
+
+    <!-- 结果映射集 -->
+    <resultMap id="SRoleMenusMap" type="com.wing.system.rolemenus.model.SRoleMenus">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="menu_id" jdbcType="VARCHAR" property="menuId"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+    </resultMap>
+
+    <!-- 查询数据 -->
+    <select id="querySRoleMenus" resultMap="SRoleMenusMap">
+    <![CDATA[
+        select
+            id,
+            menu_id,
+            role_id
+        from
+            s_role_menus
+        where
+            1 = 1
+    ]]>
+    <if test="params.id != null">
+    <![CDATA[
+        and id = #{params.id}
+    ]]>
+    </if>
+    <if test="params.menuId != null and params.menuId neq ''">
+    <![CDATA[
+        and menu_id like concat('%', #{params.menuId}, '%')
+    ]]>
+    </if>
+    <if test="params.roleId != null and params.roleId neq ''">
+    <![CDATA[
+        and role_id like concat('%', #{params.roleId}, '%')
+    ]]>
+    </if>
+    <if test="sortname != null and sortorder != null">
+        order by ${sortname} ${sortorder}
+    </if>
+    <if test="sortname != null and sortorder == null">
+        order by ${sortname} asc
+    </if>
+    </select>
+
+    <!-- 选择性插入数据 -->
+    <insert id="insert" parameterType="com.wing.system.rolemenus.model.SRoleMenus">
+    <![CDATA[
+        insert into s_role_menus
+    ]]>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+            id,
+        ]]>
+        </if>
+        <if test="menuId != null">
+        <![CDATA[
+            menu_id,
+        ]]>
+        </if>
+        <if test="roleId != null">
+        <![CDATA[
+            role_id,
+        ]]>
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+        <![CDATA[
+          #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="menuId != null">
+        <![CDATA[
+          #{menuId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="roleId != null">
+        <![CDATA[
+          #{roleId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </trim>
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete">
+    <![CDATA[
+        delete from s_role_menus where id = #{id}
+    ]]>
+    </delete>
+
+    <!-- 删除数据 -->
+    <delete id="deleteByRole">
+    <![CDATA[
+        delete from s_role_menus where role_id = #{roleId}
+    ]]>
+    </delete>
+
+    <!-- 更新数据 -->
+    <update id="update" parameterType="com.wing.system.rolemenus.model.SRoleMenus">
+    <![CDATA[
+        update s_role_menus
+    ]]>
+    <set>
+        <if test="id != null">
+        <![CDATA[
+            id = #{id, jdbcType=INTEGER},
+        ]]>
+        </if>
+        <if test="menuId != null">
+        <![CDATA[
+            menu_id = #{menuId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+        <if test="roleId != null">
+        <![CDATA[
+            role_id = #{roleId, jdbcType=VARCHAR},
+        ]]>
+        </if>
+    </set>
+    where id = #{id}
+    </update>
+
+    <!-- 根据ID获取数据 -->
+    <select id="getSRoleMenusById" resultMap="SRoleMenusMap">
+    <![CDATA[
+        select
+            id,
+            menu_id,
+            role_id
+        from
+            s_role_menus
+        where
+            id = #{id}
+    ]]>
+    </select>
+</mapper>
